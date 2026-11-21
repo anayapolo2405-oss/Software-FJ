@@ -11,11 +11,11 @@ Sistema desarrollado en Python bajo el paradigma de **Programación Orientada a 
 
 ## Equipo de Desarrollo
 
-| # | Estudiante | Código / Documento | Módulo o Responsabilidad |
+| # | Estudiante | Grupo | Módulo o Responsabilidad |
 | :- | :--- | :--- | :--- |
 | 1 | Rubén Darío Anaya Polo | 213023_552 | Entidad base, encapsulación de `Cliente` y documentación (`entidad.py`, `cliente.py`, `README.md`) |
-| 2 | Carlos Alonso Ruiz Hernandez | 213023_552 | Jerarquía de `Servicio`, polimorfismo y excepciones personalizadas (`servicios.py`, `excepciones.py`) |
-| 3 | Erik Duway Carpeta Nino | 213023_552 | Ciclo de vida de `Reserva`, controlador `SistemaFJ` y simulación (`reserva.py`, `sistema.py`, `main.py`) |
+| 2 | Carlos Alonso Ruiz Hernández | 213023_552 | Jerarquía de `Servicio`, polimorfismo y excepciones personalizadas (`servicios.py`, `excepciones.py`) |
+| 3 | Erik Duway Carpeta Niño | 213023_552 | Ciclo de vida de `Reserva`, controlador `SistemaFJ` y simulación (`reserva.py`, `sistema.py`, `main.py`) |
 
 ---
 
