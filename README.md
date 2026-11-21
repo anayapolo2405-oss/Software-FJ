@@ -32,3 +32,4 @@ Software-FJ/
 ├── main.py           # Punto de entrada con simulación de operaciones válidas e inválidas
 ├── software_fj.log   # Archivo generado automáticamente con el historial de eventos y errores
 └── README.md         # Documentación técnica y guía de ejecución del proyecto
+```
