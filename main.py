@@ -1,4 +1,3 @@
-
 import logging
 
 from sistema import SistemaFJ
@@ -10,7 +9,7 @@ from servicios import (
 )
 
 
-# Configuracion del archivo de eventos y errores
+# Configuración del archivo de eventos y errores
 logging.basicConfig(
     filename="software_fj.log",
     level=logging.INFO,
@@ -40,7 +39,6 @@ def ejecutar_operacion(numero, nombre, funcion):
 
 
 def iniciar_sistema():
-
     sistema = SistemaFJ()
 
     print("=" * 55)
@@ -135,7 +133,7 @@ def iniciar_sistema():
         )
     )
 
-    # OPERACION 8: Crear reserva valida
+    # OPERACION 8: Crear reserva valida de sala
     reserva1 = sistema.crear_reserva(
         "R001",
         cliente1,
@@ -146,7 +144,7 @@ def iniciar_sistema():
 
     ejecutar_operacion(
         8,
-        "Procesar reserva correcta",
+        "Procesar reserva correcta de sala",
         reserva1.procesar
     )
 
@@ -165,7 +163,7 @@ def iniciar_sistema():
         reserva2.procesar
     )
 
-    # OPERACION 10: Crear reserva de equipos
+    # OPERACION 10: Crear reserva de equipos (multiplica tarifa * horas * cantidad)
     reserva3 = sistema.crear_reserva(
         "R003",
         cliente1,
@@ -180,21 +178,23 @@ def iniciar_sistema():
         reserva3.procesar
     )
 
-    # OPERACION 11: Crear reserva de asesoria
+    # OPERACION 11: Crear reserva de asesoria con descuento e impuesto
     reserva4 = sistema.crear_reserva(
         "R004",
         cliente1,
         asesoria,
-        2
+        2,
+        descuento=10,
+        impuesto=19
     )
 
     ejecutar_operacion(
         11,
-        "Procesar reserva de asesoria",
+        "Procesar reserva de asesoria con descuento e IVA",
         reserva4.procesar
     )
 
-    # OPERACION 12: Cancelar una reserva
+    # OPERACION 12: Cancelar una reserva confirmada
     ejecutar_operacion(
         12,
         "Cancelar reserva confirmada",
@@ -208,25 +208,54 @@ def iniciar_sistema():
         reserva1.cancelar
     )
 
-    # OPERACION 14: Calcular costo normal
+    # OPERACION 14: Calcular costo normal (sobrecarga 1 parametro)
     ejecutar_operacion(
         14,
         "Calcular costo normal",
         lambda: sala.calcular_costo(2)
     )
 
-    # OPERACION 15: Calcular costo con descuento
+    # OPERACION 15: Calcular costo con descuento (sobrecarga 2 parametros)
     ejecutar_operacion(
         15,
         "Calcular costo con descuento",
         lambda: sala.calcular_costo(2, 10)
     )
 
-    # OPERACION 16: Calcular costo con descuento e impuesto
+    # OPERACION 16: Calcular costo con descuento e impuesto (sobrecarga 3 parametros)
     ejecutar_operacion(
         16,
         "Calcular costo con descuento e impuesto",
         lambda: sala.calcular_costo(2, 10, 19)
+    )
+
+    # OPERACION 17: Procesar reserva con parametros faltantes (sin 'asistentes')
+    reserva5 = sistema.crear_reserva(
+        "R005",
+        cliente1,
+        sala,
+        2
+    )
+
+    ejecutar_operacion(
+        17,
+        "Procesar reserva con parametros faltantes",
+        reserva5.procesar
+    )
+
+    # OPERACION 18: Procesar reserva cuando el servicio no esta disponible
+    asesoria.disponible = False
+    reserva6 = sistema.crear_reserva(
+        "R006",
+        cliente1,
+        asesoria,
+        2
+    )
+
+    ejecutar_operacion(
+        18,
+        "Procesar reserva con servicio no disponible",
+        reserva6.procesar
     )
 
     # Mostrar informacion final
