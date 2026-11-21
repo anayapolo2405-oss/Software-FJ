@@ -1,4 +1,3 @@
-
 import logging
 from excepciones import (
     ReservaInvalidaError,
@@ -8,18 +7,34 @@ from excepciones import (
 
 
 class Reserva:
+    """Gestiona el ciclo de vida, validación y cobro de una reserva."""
 
-    def __init__(self, identificador, cliente, servicio, duracion, **parametros):
-        if not identificador or not str(identificador).strip():
+    def __init__(
+        self,
+        identificador,
+        cliente,
+        servicio,
+        duracion,
+        descuento=0,
+        impuesto=0,
+        **parametros
+    ):
+        if (
+            identificador is None
+            or isinstance(identificador, bool)
+            or not str(identificador).strip()
+        ):
             raise ReservaInvalidaError("El identificador de la reserva es obligatorio.")
 
-        self.identificador = str(identificador)
+        self.identificador = str(identificador).strip()
         self.cliente = cliente
         self.servicio = servicio
         self.duracion = duracion
+        self.descuento = descuento
+        self.impuesto = impuesto
         self.parametros = parametros
         self.estado = "Pendiente"
-        self.total = 0
+        self.total = 0.0
 
     def confirmar(self):
         if self.estado != "Pendiente":
@@ -30,21 +45,36 @@ class Reserva:
         if not self.servicio.disponible:
             raise ServicioNoDisponibleError("El servicio no está disponible.")
 
-        self.servicio.validar_parametros(
-            self.duracion, **self.parametros
+        self.servicio.validar_parametros(self.duracion, **self.parametros)
+
+        self.total = self.servicio.calcular_costo(
+            self.duracion,
+            self.descuento,
+            self.impuesto,
+            **self.parametros
         )
 
-        self.total = self.servicio.calcular_costo(self.duracion)
-        self.estado = "Confirmada"
+        if hasattr(self.servicio, "cantidad_disponible"):
+            cantidad = self.parametros["cantidad"]
+            self.servicio.cantidad_disponible -= cantidad
+            if self.servicio.cantidad_disponible == 0:
+                self.servicio.disponible = False
 
-        logging.info("Reserva %s confirmada.", self.identificador)
+        self.estado = "Confirmada"
+        logging.info("Reserva %s confirmada. Total: $%s", self.identificador, f"{self.total:,.2f}")
         return self.total
 
     def cancelar(self):
-        if self.estado != "Confirmada" and self.estado != "Pendiente":
+        if self.estado not in ("Confirmada", "Pendiente"):
             raise OperacionNoPermitidaError(
                 "La reserva no se puede cancelar."
             )
+
+        if self.estado == "Confirmada" and hasattr(self.servicio, "cantidad_disponible"):
+            cantidad = self.parametros.get("cantidad", 0)
+            self.servicio.cantidad_disponible += cantidad
+            if self.servicio.cantidad_disponible > 0:
+                self.servicio.disponible = True
 
         self.estado = "Cancelada"
         logging.info("Reserva %s cancelada.", self.identificador)
@@ -58,7 +88,6 @@ class Reserva:
                 "Error al procesar la reserva %s.",
                 self.identificador
             )
-
             self.estado = "Fallida"
 
             raise ReservaInvalidaError(
