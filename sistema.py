@@ -1,4 +1,3 @@
-
 import logging
 
 from cliente import Cliente
@@ -7,11 +6,13 @@ from reserva import Reserva
 from excepciones import (
     DatosInvalidosError,
     ClienteDuplicadoError,
-    ServicioNoDisponibleError
+    ServicioNoDisponibleError,
+    ReservaInvalidaError
 )
 
 
 class SistemaFJ:
+    """Controlador principal en memoria para clientes, servicios y reservas."""
 
     def __init__(self):
         self.clientes = []
@@ -54,26 +55,45 @@ class SistemaFJ:
             logging.info("Servicio agregado: %s", servicio.nombre)
             return True
 
-    def crear_reserva(self, identificador, cliente, servicio, duracion, **parametros):
-        if cliente not in self.clientes:
-            raise DatosInvalidosError("El cliente no está registrado.")
+    def crear_reserva(
+        self,
+        identificador,
+        cliente,
+        servicio,
+        duracion,
+        descuento=0,
+        impuesto=0,
+        **parametros
+    ):
+        try:
+            if cliente not in self.clientes:
+                raise DatosInvalidosError("El cliente no está registrado.")
 
-        if servicio not in self.servicios:
-            raise ServicioNoDisponibleError("El servicio no está registrado.")
+            if servicio not in self.servicios:
+                raise ServicioNoDisponibleError("El servicio no está registrado.")
 
-        reserva = Reserva(
-            identificador,
-            cliente,
-            servicio,
-            duracion,
-            **parametros
-        )
+            if any(r.identificador == str(identificador).strip() for r in self.reservas):
+                raise ReservaInvalidaError("Ya existe una reserva con ese identificador.")
 
-        self.reservas.append(reserva)
+            reserva = Reserva(
+                identificador,
+                cliente,
+                servicio,
+                duracion,
+                descuento=descuento,
+                impuesto=impuesto,
+                **parametros
+            )
 
-        logging.info("Reserva creada: %s", identificador)
+            self.reservas.append(reserva)
 
-        return reserva
+        except Exception:
+            logging.exception("Error al crear la reserva %s.", identificador)
+            raise
+
+        else:
+            logging.info("Reserva creada: %s", reserva.identificador)
+            return reserva
 
     def listar_clientes(self):
         return [cliente.descripcion() for cliente in self.clientes]
