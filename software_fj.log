@@ -1,0 +1,175 @@
+2026-11-21 18:58:20,110 - INFO - Cliente registrado: Carlos Rodriguez
+2026-11-21 18:58:20,113 - ERROR - Operacion Registrar cliente con correo incorrecto fallida.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 26, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 67, in <lambda>
+    lambda: Cliente(
+            ~~~~~~~^
+        "C002",
+        ^^^^^^^
+    ...<2 lines>...
+        "3011234567"
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\cliente.py", line 17, in __init__
+    self.correo = correo
+    ^^^^^^^^^^^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\cliente.py", line 39, in correo
+    raise DatosInvalidosError("El correo electrónico no es válido.")
+excepciones.DatosInvalidosError: El correo electrónico no es válido.
+2026-11-21 18:58:20,163 - ERROR - Error al registrar un cliente.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\sistema.py", line 28, in registrar_cliente
+    raise ClienteDuplicadoError("El cliente ya está registrado.")
+excepciones.ClienteDuplicadoError: El cliente ya está registrado.
+2026-11-21 18:58:20,164 - ERROR - Operacion Registrar cliente duplicado fallida.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 26, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 79, in <lambda>
+    lambda: sistema.registrar_cliente(cliente1)
+            ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\sistema.py", line 28, in registrar_cliente
+    raise ClienteDuplicadoError("El cliente ya está registrado.")
+excepciones.ClienteDuplicadoError: El cliente ya está registrado.
+2026-11-21 18:58:20,165 - INFO - Servicio agregado: Sala de reuniones
+2026-11-21 18:58:20,165 - INFO - Servicio agregado: Video Beam
+2026-11-21 18:58:20,166 - INFO - Servicio agregado: Asesoria informatica
+2026-11-21 18:58:20,166 - ERROR - Operacion Crear servicio con tarifa negativa fallida.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 26, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 128, in <lambda>
+    lambda: ReservaSala(
+            ~~~~~~~~~~~^
+        "S002",
+        ^^^^^^^
+    ...<2 lines>...
+        10
+        ^^
+    )
+    ^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\servicios.py", line 66, in __init__
+    super().__init__(identificador, nombre, tarifa)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\servicios.py", line 16, in __init__
+    raise DatosInvalidosError("La tarifa debe ser mayor que cero.")
+excepciones.DatosInvalidosError: La tarifa debe ser mayor que cero.
+2026-11-21 18:58:20,168 - INFO - Reserva creada: R001
+2026-11-21 18:58:20,168 - INFO - Reserva R001 confirmada. Total: $100,000.00
+2026-11-21 18:58:20,168 - INFO - Procesamiento finalizado correctamente.
+2026-11-21 18:58:20,168 - INFO - Finalizó el intento de procesamiento de la reserva R001.
+2026-11-21 18:58:20,168 - INFO - Reserva creada: R002
+2026-11-21 18:58:20,169 - ERROR - Error al procesar la reserva R002.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 84, in procesar
+    resultado = self.confirmar()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 48, in confirmar
+    self.servicio.validar_parametros(self.duracion, **self.parametros)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\servicios.py", line 86, in validar_parametros
+    raise DatosInvalidosError("La cantidad de asistentes supera la capacidad de la sala.")
+excepciones.DatosInvalidosError: La cantidad de asistentes supera la capacidad de la sala.
+2026-11-21 18:58:20,170 - INFO - Finalizó el intento de procesamiento de la reserva R002.
+2026-11-21 18:58:20,170 - ERROR - Operacion Procesar reserva con asistentes incorrectos fallida.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 84, in procesar
+    resultado = self.confirmar()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 48, in confirmar
+    self.servicio.validar_parametros(self.duracion, **self.parametros)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\servicios.py", line 86, in validar_parametros
+    raise DatosInvalidosError("La cantidad de asistentes supera la capacidad de la sala.")
+excepciones.DatosInvalidosError: La cantidad de asistentes supera la capacidad de la sala.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 26, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 93, in procesar
+    raise ReservaInvalidaError(
+        "No fue posible procesar la reserva."
+    ) from error
+excepciones.ReservaInvalidaError: No fue posible procesar la reserva.
+2026-11-21 18:58:20,173 - INFO - Reserva creada: R003
+2026-11-21 18:58:20,173 - INFO - Reserva R003 confirmada. Total: $180,000.00
+2026-11-21 18:58:20,173 - INFO - Procesamiento finalizado correctamente.
+2026-11-21 18:58:20,173 - INFO - Finalizó el intento de procesamiento de la reserva R003.
+2026-11-21 18:58:20,174 - INFO - Reserva creada: R004
+2026-11-21 18:58:20,174 - INFO - Reserva R004 confirmada. Total: $171,360.00
+2026-11-21 18:58:20,174 - INFO - Procesamiento finalizado correctamente.
+2026-11-21 18:58:20,174 - INFO - Finalizó el intento de procesamiento de la reserva R004.
+2026-11-21 18:58:20,175 - INFO - Reserva R001 cancelada.
+2026-11-21 18:58:20,175 - ERROR - Operacion Intentar cancelar una reserva ya cancelada fallida.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 26, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 69, in cancelar
+    raise OperacionNoPermitidaError(
+        "La reserva no se puede cancelar."
+    )
+excepciones.OperacionNoPermitidaError: La reserva no se puede cancelar.
+2026-11-21 18:58:20,177 - INFO - Reserva creada: R005
+2026-11-21 18:58:20,178 - ERROR - Error al procesar la reserva R005.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 84, in procesar
+    resultado = self.confirmar()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 48, in confirmar
+    self.servicio.validar_parametros(self.duracion, **self.parametros)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\servicios.py", line 78, in validar_parametros
+    raise DatosInvalidosError("Falta el parámetro obligatorio: asistentes.")
+excepciones.DatosInvalidosError: Falta el parámetro obligatorio: asistentes.
+2026-11-21 18:58:20,179 - INFO - Finalizó el intento de procesamiento de la reserva R005.
+2026-11-21 18:58:20,179 - ERROR - Operacion Procesar reserva con parametros faltantes fallida.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 84, in procesar
+    resultado = self.confirmar()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 48, in confirmar
+    self.servicio.validar_parametros(self.duracion, **self.parametros)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\servicios.py", line 78, in validar_parametros
+    raise DatosInvalidosError("Falta el parámetro obligatorio: asistentes.")
+excepciones.DatosInvalidosError: Falta el parámetro obligatorio: asistentes.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 26, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 93, in procesar
+    raise ReservaInvalidaError(
+        "No fue posible procesar la reserva."
+    ) from error
+excepciones.ReservaInvalidaError: No fue posible procesar la reserva.
+2026-11-21 18:58:20,180 - INFO - Reserva creada: R006
+2026-11-21 18:58:20,181 - ERROR - Error al procesar la reserva R006.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 84, in procesar
+    resultado = self.confirmar()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 46, in confirmar
+    raise ServicioNoDisponibleError("El servicio no está disponible.")
+excepciones.ServicioNoDisponibleError: El servicio no está disponible.
+2026-11-21 18:58:20,181 - INFO - Finalizó el intento de procesamiento de la reserva R006.
+2026-11-21 18:58:20,182 - ERROR - Operacion Procesar reserva con servicio no disponible fallida.
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 84, in procesar
+    resultado = self.confirmar()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 46, in confirmar
+    raise ServicioNoDisponibleError("El servicio no está disponible.")
+excepciones.ServicioNoDisponibleError: El servicio no está disponible.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\main.py", line 26, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\CARLOS F MORENO R\Downloads\Software-FJ-main (2)\Software-FJ-main\reserva.py", line 93, in procesar
+    raise ReservaInvalidaError(
+        "No fue posible procesar la reserva."
+    ) from error
+excepciones.ReservaInvalidaError: No fue posible procesar la reserva.
+2026-11-21 18:58:20,185 - INFO - Finalizacion del sistema Software FJ.
